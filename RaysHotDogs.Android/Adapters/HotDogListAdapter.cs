@@ -52,11 +52,13 @@ namespace RaysHotDogs.Android.Adapters
 
             if (convertView == null)
             {
-                convertView = context.LayoutInflater.Inflate(global::Android.Resource.Layout.ActivityListItem, null);
+                convertView = context.LayoutInflater.Inflate(Android.Resource.Layout.HotDogRowView, null);
             }
 
-            convertView.FindViewById<TextView>(global::Android.Resource.Id.Text1).Text = item.Name;
-            convertView.FindViewById<ImageView>(global::Android.Resource.Id.Icon).SetImageBitmap(imageBitmap);
+            convertView.FindViewById<TextView>(Resource.Id.hotDogNameTextView).Text = item.Name;
+            convertView.FindViewById<TextView>(Resource.Id.shortDescriptionTextView).Text = item.ShortDescription;
+            convertView.FindViewById<TextView>(Resource.Id.priceTextView).Text = "$ " + item.Price;
+            convertView.FindViewById<ImageView>(Resource.Id.hotDogImageView).SetImageBitmap(imageBitmap);
 
             return convertView;
         }

@@ -4,14 +4,13 @@ using Android.OS;
 
 namespace RaysHotDogs.Android
 {
-    [Activity(Label = "RaysHotDogs", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "RaysHotDogs", Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
-            // Set our view from the "main" layout resource
             SetContentView (Resource.Layout.Main);
         }
     }
