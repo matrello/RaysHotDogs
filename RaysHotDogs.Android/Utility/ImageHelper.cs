@@ -32,7 +32,7 @@ namespace RaysHotDogs.Android.Utility
             return imageBitmap;
         }
 
-        public static Bitmap GetImageBitMapFromFilePath(string fileName, int width, int height)
+        public static Bitmap GetImageBitmapFromFilePath(string fileName, int width, int height)
         {
             BitmapFactory.Options options = new BitmapFactory.Options { InJustDecodeBounds = true };
             BitmapFactory.DecodeFile(fileName, options);
