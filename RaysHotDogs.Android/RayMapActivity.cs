@@ -9,6 +9,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Android.Gms.Maps;
+using Android.Gms.Maps.Model;
 
 namespace RaysHotDogs.Android
 {
@@ -16,10 +18,16 @@ namespace RaysHotDogs.Android
     public class RayMapActivity : Activity
     {
         private Button externalMapButton;
+        private FrameLayout mapFrameLayout;
+        private MapFragment mapFragment;
+        private GoogleMap googleMap;
+        private LatLng rayLocation;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+
+            rayLocation = new LatLng(41.904759, 12.482938);
 
             SetContentView(Resource.Layout.RayMapView);
 
@@ -27,11 +35,9 @@ namespace RaysHotDogs.Android
 
             HandleEvents();
 
-        }
+            CreateMapFragment();
 
-        private void FindViews()
-        {
-            externalMapButton = FindViewById<Button>(Resource.Id.externalMapButton);
+            UpdateMapView();
         }
 
         private void HandleEvents()
@@ -44,6 +50,67 @@ namespace RaysHotDogs.Android
             global::Android.Net.Uri rayLocationUri = global::Android.Net.Uri.Parse("geo:41.904759, 12.482938");
             Intent mapIntent = new Intent(Intent.ActionView, rayLocationUri);
             StartActivity(mapIntent);
+        }
+
+        private void FindViews()
+        {
+            externalMapButton = FindViewById<Button>(Resource.Id.externalMapButton);
+        }
+
+        private void UpdateMapView()
+        {
+            var mapReadyCallback = new LocalMapReady();
+
+            mapReadyCallback.MapReady += (sender, args) =>
+            {
+                googleMap = (sender as LocalMapReady).Map;
+
+                if (googleMap != null)
+                {
+                    MarkerOptions markerOptions = new MarkerOptions();
+                    markerOptions.SetPosition(rayLocation);
+                    markerOptions.SetTitle("Ray's Hot Dogs");
+                    googleMap.AddMarker(markerOptions);
+
+                    CameraUpdate cameraUpdate = CameraUpdateFactory.NewLatLngZoom(rayLocation, 15);
+                    googleMap.MoveCamera(cameraUpdate);
+                }
+            };
+
+            mapFragment.GetMapAsync(mapReadyCallback);
+        }
+
+        private void CreateMapFragment()
+        {
+            mapFragment = FragmentManager.FindFragmentByTag("map") as MapFragment;
+
+            if (mapFragment == null)
+            {
+                var googleMapOptions = new GoogleMapOptions()
+                    .InvokeMapType(GoogleMap.MapTypeSatellite)
+                    .InvokeZoomControlsEnabled(true)
+                    .InvokeCompassEnabled(true);
+
+                FragmentTransaction fragmentTransaction = FragmentManager.BeginTransaction();
+                mapFragment = MapFragment.NewInstance(googleMapOptions);
+                fragmentTransaction.Add(Resource.Id.mapFrameLayout, mapFragment, "map");
+                fragmentTransaction.Commit();
+            }
+        }
+
+        private class LocalMapReady : Java.Lang.Object, IOnMapReadyCallback
+        {
+            public GoogleMap Map { get; private set; }
+
+            public event EventHandler MapReady;
+
+            public void OnMapReady(GoogleMap googleMap)
+            {
+                Map = googleMap;
+                var handler = MapReady;
+                if (handler != null)
+                    handler(this, EventArgs.Empty);
+            }
         }
     }
 }
