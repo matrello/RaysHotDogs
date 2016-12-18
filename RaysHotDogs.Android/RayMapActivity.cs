@@ -14,7 +14,7 @@ using Android.Gms.Maps.Model;
 
 namespace RaysHotDogs.Android
 {
-    [Activity(Label = "Visit Ray's store")]
+    [Activity(Label = "Visit Ray's store", Icon = "@drawable/smallicon")]
     public class RayMapActivity : Activity
     {
         private Button externalMapButton;

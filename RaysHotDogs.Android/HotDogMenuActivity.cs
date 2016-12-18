@@ -16,7 +16,7 @@ using RaysHotDogs.Android.Fragments;
 
 namespace RaysHotDogs.Android
 {
-    [Activity(Label = "Hot Dog Menu", MainLauncher = true)]
+    [Activity(Label = "Hot Dog Menu", MainLauncher = true, Icon = "@drawable/smallicon")]
     public class HotDogMenuActivity : Activity
     {
         private ListView hotdogListView;

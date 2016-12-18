@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Ray\'s Hot Dogs</string>
+  <string name="orderButtonText">Ordina hot dogs!</string>
+  <string name="cartButtonText">Guarda il carrello</string>
+  <string name="takePictureButtonText">Fai una foto con Ray</string>
+  <string name="mapButtonText">Vai allo store di Ray</string>
+  <string name="aboutButtonText">Info su Ray\'s Hot Dogs</string>
+</resources>

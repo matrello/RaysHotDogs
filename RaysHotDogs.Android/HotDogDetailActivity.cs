@@ -15,7 +15,7 @@ using RaysHotDogs.Android.Utility;
 
 namespace RaysHotDogs.Android
 {
-    [Activity(Label = "Hot Dog Detail")]
+    [Activity(Label = "Hot Dog Detail", Icon = "@drawable/smallicon")]
     public class HotDogDetailActivity : Activity
     {
         private ImageView hotDogImageView;

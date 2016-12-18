@@ -13,7 +13,7 @@ using RaysHotDogs.Android;
 
 namespace RaysHotDogs
 {
-    [Activity(Label = "About Ray's Hot Dogs")]
+    [Activity(Label = "About Ray's Hot Dogs", Icon = "@drawable/smallicon")]
     public class AboutActivity : Activity
     {
         private TextView phoneNumberTextView;

@@ -4,7 +4,7 @@ using Android.OS;
 
 namespace RaysHotDogs.Android
 {
-    [Activity(Label = "RaysHotDogs", Icon = "@drawable/icon")]
+    [Activity(Label = "Ray's Hot Dogs", Icon = "@drawable/smallicon")]
     public class MainActivity : Activity
     {
         protected override void OnCreate(Bundle bundle)
